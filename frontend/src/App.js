@@ -1,19 +1,22 @@
-import { useRoutes } from 'react-router-dom';
-     import routes from './router';
-     import Sidebar from './components/Sidebar';
-     import Navbar from './components/Navbar';
+import { useRoutes, useLocation } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Navbar from './components/Navbar';
+import routes from './router';
 
-     function App() {
-       const content = useRoutes(routes);
-       return (
-         <div className="flex">
-           <Sidebar />
-           <div className="flex-1">
-             <Navbar />
-             <div className="p-4">{content}</div>
-           </div>
-         </div>
-       );
-     }
+function App() {
+  const content = useRoutes(routes);
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
-     export default App;
+  return (
+    <div className="flex min-h-screen">
+      {!isAuthPage && <Sidebar />}
+      <div className={`flex-1 ${!isAuthPage ? 'ml-64 pt-20' : ''}`}>
+        {!isAuthPage && <Navbar />}
+        <div className="p-6">{content}</div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

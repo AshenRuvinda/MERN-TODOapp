@@ -3,17 +3,72 @@
 
   @layer components {
     .btn-primary {
-      @apply bg-primary text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition;
+      @apply bg-gradient-to-r from-primary-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 border-none cursor-pointer hover:transform hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-500/30;
     }
     .btn-secondary {
-      @apply bg-secondary text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-600 transition;
+      @apply bg-secondary-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 hover:bg-secondary-700;
     }
     .card {
-      @apply bg-card shadow-lg rounded-lg p-6;
+      @apply bg-card rounded-2xl p-6 shadow-lg border border-gray-100 transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5;
     }
-    .input {
-      @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary;
+    .glass {
+      @apply bg-white/25 backdrop-blur-md border border-white/20 rounded-lg;
+    }
+    .nav-item {
+      @apply flex items-center p-3 mb-2 rounded-xl transition-all duration-200 text-gray-400 no-underline hover:bg-gray-600/50 hover:text-white hover:transform hover:scale-105;
+    }
+    .nav-item.active {
+      @apply bg-gradient-to-r from-primary-600 to-blue-600 text-white transform scale-105;
+    }
+    .task-card {
+      @apply bg-white rounded-xl p-4 mb-3 border border-gray-200 transition-all duration-200 cursor-move hover:shadow-lg hover:-translate-y-0.5;
+    }
+    .priority-high {
+      @apply border-l-4 border-danger bg-gradient-to-r from-red-50 to-white;
+    }
+    .priority-medium {
+      @apply border-l-4 border-warning bg-gradient-to-r from-yellow-50 to-white;
+    }
+    .priority-low {
+      @apply border-l-4 border-success bg-gradient-to-r from-green-50 to-white;
+    }
+    .status-badge {
+      @apply px-3 py-1 rounded-full text-xs font-semibold;
+    }
+    .status-todo {
+      @apply bg-blue-100 text-primary-600;
+    }
+    .status-progress {
+      @apply bg-yellow-100 text-yellow-600;
+    }
+    .status-done {
+      @apply bg-green-100 text-green-600;
     }
   }
 
   @tailwind utilities;
+
+  @layer utilities {
+    .animate-slide-in {
+      animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      @apply bg-gray-100 rounded;
+    }
+    ::-webkit-scrollbar-thumb {
+      @apply bg-gray-300 rounded hover:bg-gray-400;
+    }
+  }
